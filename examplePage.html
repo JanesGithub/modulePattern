@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <body>
+
+    <p>An unordered list:</p>
+    <ul>
+      <li class="fav">Coffee</li>
+      <li class="fav">Tea</li>
+      <li>Milk</li>
+    </ul>
+
+    <div id="demo-hide">
+      <p>Demo for hide</p>
+    </div>
+
+    <p>Click the button to display the innerHTML of the UL element (index 3).</p>
+
+    <button onclick="myFunction()">Try it</button>
+
+    <p id="demo"></p>
+
+<!-- <script>
+function myFunction() {
+    var x = document.getElementsByTagName("*");
+    document.getElementById("demo").innerHTML = x[4].getElementsByClassName("fav").innerHTML;
+    console.log(x[4].getElementsByClassName("fav"));
+    console.log(x[2]);
+}
+</script> -->
+
+  <script type="text/javascript" src="jqueryFunctions.js"></script>
+  <script>
+  function myFunction() {
+      var x = $.query("#demo-hide").hide();
+    }
+  </script>
+
+  </body>
+</html>
