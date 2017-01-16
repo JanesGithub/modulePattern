@@ -12,25 +12,71 @@ var $ = function() {
       selector = selector.slice(1);
       element = document.getElementsByClassName(selector);
     } else if (selector.match(tagClassExp)) {
-      var sel1 = selector.slice(0, selector.indexOf("."));
-      var sel2 = selector.slice(selector.indexOf("."))
-      element = document.getElementsByTagName(sel1).getElementsByClassName(sel2);
+      element = document.querySelectorAll(selector);
     }
-    console.log(element);
     return element;
   }
 
+  function addClass(e, c) {
+    if (e.className.indexOf(c) === -1) {
+      e.className += c;
+    }
+  }
+
+  function removeClass(e, c) {
+    var index = e.className.indexOf(c);
+    if (index !== -1) {
+      e.className = e.className.slice(0,index) + e.className.slice(index + c.length);
+    }
+  }
+
   function hideElements(element) {
-    if (element.length > 1) {
+    if (element.length > 0) {
       element = Array.prototype.slice.call(element);
       element.forEach(function(item) {
-        console.log("hide " + item)
-        item.style.display = "none";
+        addClass(item, " hidden");
       });
     } else {
-      console.log("hide " + element)
-      element.style.display = "none";
+      addClass(element, " hidden");
     }
+  }
+
+  function showElements(element) {
+    if (element.length > 0) {
+      element = Array.prototype.slice.call(element);
+      element.forEach(function(item) {
+        removeClass(item, "hidden");
+      });
+    } else {
+      removeClass(element, "hidden");
+    }
+  }
+
+  function getHtml(element) {
+    if (element.length > 0) {
+      element = Array.prototype.slice.call(element);
+      element.forEach(function(item) {
+        var text = item.innerHTML;
+        return text;
+      });
+    } else {
+      console.log(element.innerHTML);
+      var text = element.innerHTML;
+      return text;
+    }
+
+  }
+
+  function setHtml(element, newHtml) {
+    if (element.length > 0) {
+      element = Array.prototype.slice.call(element);
+      element.forEach(function(item) {
+        item.innerHTML = newHtml;
+      });
+    } else {
+      element.innerHTML = newHtml;
+    }
+
   }
 
   return {
@@ -39,7 +85,16 @@ var $ = function() {
       return {
         hide: function() {
           hideElements(elements);
+        },
+        show: function() {
+          showElements(elements);
+        },
+        html: function() {
+          getHtml(elements);
         }
+        // html: function(newHtml) {
+        //   setHtml(elements, newHtml);
+        // }
       }
     }
   }

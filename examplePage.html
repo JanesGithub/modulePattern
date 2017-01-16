@@ -1,39 +1,65 @@
 <!DOCTYPE html>
 <html>
+  <meta charset="utf-8">
+  <link href="style.css" rel="stylesheet">
   <body>
-
+    <h1 class="class-hide">class to hide</h1>
     <p>An unordered list:</p>
     <ul>
-      <li class="fav">Coffee</li>
-      <li class="fav">Tea</li>
+      <li class="class-hide">class to hide</li>
+      <li>Tea</li>
       <li>Milk</li>
+      <li class="tag-class_hide">tag class hide 1</li>
+      <li class="tag-class_hide">tag class hide 2</li>
     </ul>
 
-    <div id="demo-hide">
+    <div id="id-hide">
       <p>Demo for hide</p>
     </div>
 
     <p>Click the button to display the innerHTML of the UL element (index 3).</p>
 
-    <button onclick="myFunction()">Try it</button>
+    <button onclick="hideId()">Hide by id</button>
+    <button onclick="hideClass()">Hide by class</button>
+    <button onclick="hideTagClass()">Hide by tag and class</button>
+
+    <button onclick="showId()">Show by id</button>
+    <button onclick="showClass()">Show by class</button>
+    <button onclick="showTagClass()">Show by tag and class</button><br>
+
+    <button onclick="getHtml()">get html by id</button>
+    <button onclick="getHtml()">get html by class</button>
+    <button onclick="getHtml()">get html by tag class</button>
+
+
+
 
     <p id="demo"></p>
 
-<!-- <script>
-function myFunction() {
-    var x = document.getElementsByTagName("*");
-    document.getElementById("demo").innerHTML = x[4].getElementsByClassName("fav").innerHTML;
-    console.log(x[4].getElementsByClassName("fav"));
-    console.log(x[2]);
-}
-</script> -->
-
   <script type="text/javascript" src="jqueryFunctions.js"></script>
   <script>
-  function myFunction() {
-      var x = $.query("#demo-hide").hide();
+    function hideId() {
+      $.query("#id-hide").hide();
     }
-  </script>
+    function hideClass() {
+      $.query(".class-hide").hide();
+    }
+    function hideTagClass() {
+      $.query("li.tag-class_hide").hide();
+    }
+    function showId() {
+      $.query("#id-hide").show();
+    }
+    function showClass() {
+      $.query(".class-hide").show();
+    }
+    function showTagClass() {
+      $.query("li.tag-class_hide").show();
+    }
+    function getHtml() {
+      document.getElementById("demo").innerHTML = $.query("#id-hide").html();
+    }
+    </script>
 
   </body>
 </html>
