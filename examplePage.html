@@ -27,9 +27,16 @@
     <button onclick="showClass()">Show by class</button>
     <button onclick="showTagClass()">Show by tag and class</button><br>
 
-    <button onclick="getHtml()">get html by id</button>
-    <button onclick="getHtml()">get html by class</button>
-    <button onclick="getHtml()">get html by tag class</button>
+    <button onclick="getHtml1()">get html by id</button>
+    <button onclick="getHtml2()">get html by class</button>
+    <button onclick="getHtml3()">get html by tag class</button><br>
+
+    <button onclick="setHtml1()">set html by id</button>
+    <button onclick="setHtml2()">set html by class</button>
+    <button onclick="setHtml3()">set html by tag class</button><br>
+
+    <button onclick="forEachElement()">for each hide</button>
+
 
 
 
@@ -40,6 +47,7 @@
   <script>
     function hideId() {
       $.query("#id-hide").hide();
+
     }
     function hideClass() {
       $.query(".class-hide").hide();
@@ -48,16 +56,36 @@
       $.query("li.tag-class_hide").hide();
     }
     function showId() {
-      $.query("#id-hide").show();
+      $.query("#id-hide").hide().show();
     }
     function showClass() {
-      $.query(".class-hide").show();
+      $.query(".class-hide").hide().show();
     }
     function showTagClass() {
-      $.query("li.tag-class_hide").show();
+      $.query("li.tag-class_hide").hide().show();
     }
-    function getHtml() {
+    function getHtml1() {
       document.getElementById("demo").innerHTML = $.query("#id-hide").html();
+    }
+    function getHtml2() {
+      document.getElementById("demo").innerHTML = $.query(".class-hide").html();
+    }
+    function getHtml3() {
+      document.getElementById("demo").innerHTML = $.query("li.tag-class_hide").html();
+    }
+    function setHtml1() {
+      $.query("#id-hide").html("set new innerhtml");
+    }
+    function setHtml2() {
+      $.query(".class-hide").html("set new innerhtml");
+    }
+    function setHtml3() {
+      $.query("li.tag-class_hide").html("set new innerhtml");
+    }
+    function forEachElement() {
+      $.query("li.tag-class_hide").forEach(function(item) {
+        item.hide();
+      });
     }
     </script>
 

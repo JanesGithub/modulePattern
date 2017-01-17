@@ -54,48 +54,56 @@ var $ = function() {
 
   function getHtml(element) {
     if (element.length > 0) {
-      element = Array.prototype.slice.call(element);
-      element.forEach(function(item) {
-        var text = item.innerHTML;
-        return text;
-      });
+      return element[0].innerHTML;
     } else {
-      console.log(element.innerHTML);
-      var text = element.innerHTML;
-      return text;
+      return element.innerHTML;
     }
-
   }
 
   function setHtml(element, newHtml) {
     if (element.length > 0) {
-      element = Array.prototype.slice.call(element);
-      element.forEach(function(item) {
-        item.innerHTML = newHtml;
-      });
+      element[0].innerHTML = newHtml;
     } else {
       element.innerHTML = newHtml;
     }
+  }
 
+  function forEachElement(elements, f) {
+    elements = Array.prototype.slice.call(elements);
+    if (elements.length > 0) {
+      elements.forEach(function(item) {
+        f(createToggleableHtmlElement(item));
+      });
+    }
+  }
+
+  function createToggleableHtmlElement(elements) {
+    return {
+      hide: function() {
+        hideElements(elements);
+        return this;
+      },
+      show: function() {
+        showElements(elements);
+        return this;
+      },
+      html: function() {
+        return getHtml(elements);
+      },
+      html: function(newHtml) {
+        setHtml(elements, newHtml);
+        return this;
+      },
+      forEach: function(f) {
+        forEachElement(elements, f);
+      }
+    }
   }
 
   return {
     query: function(sel) {
       var elements = getElementsBySelector(sel);
-      return {
-        hide: function() {
-          hideElements(elements);
-        },
-        show: function() {
-          showElements(elements);
-        },
-        html: function() {
-          getHtml(elements);
-        }
-        // html: function(newHtml) {
-        //   setHtml(elements, newHtml);
-        // }
-      }
+      return createToggleableHtmlElement(elements);
     }
   }
 }();
