@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
+<head>
   <meta charset="utf-8">
   <link href="style.css" rel="stylesheet">
+  <script src="babel-core-5.8.25.js"></script>
+</head>
   <body>
     <h1 class="class-hide">class to hide</h1>
     <p>An unordered list:</p>
@@ -35,16 +38,18 @@
     <button onclick="setHtml2()">set html by class</button>
     <button onclick="setHtml3()">set html by tag class</button><br>
 
-    <button onclick="forEachElement()">for each hide</button>
-
+    <button onclick="forEachElement()">for each hide</button><br>
 
 
 
 
     <p id="demo"></p>
 
-  <script type="text/javascript" src="jqueryFunctions.js"></script>
+  <script type="text/babel" src="jqueryFunctions.js"></script>
+  <script type="text/babel" src="jqueryEventsBinding.js"></script>
   <script>
+
+
     function hideId() {
       $.query("#id-hide").hide();
 
@@ -87,6 +92,7 @@
         item.hide();
       });
     }
+
     </script>
 
   </body>

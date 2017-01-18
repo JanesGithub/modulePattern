@@ -1,4 +1,4 @@
-var $ = function() {
+export var $ = function() {
   var idExp = /^[#]{1}[\w\-]+$/;
   var classExp = /^[.]{1}[\w\-]+$/;
   var tagClassExp = /^[\w\*]+[.]{1}[\w\-]+$/;
@@ -100,10 +100,41 @@ var $ = function() {
     }
   }
 
+  function ajaxRequest({url, method, data, success, fail}) {
+    console.log(`Params: url=${url}, method=${method}, data=${data}`);
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        success();
+      } else if (xhr.status !== 200) {
+        fail();
+      }
+    };
+    xhr.send(data);
+  }
+
   return {
     query: function(sel) {
       var elements = getElementsBySelector(sel);
       return createToggleableHtmlElement(elements);
+    },
+
+    ajax: function({
+      url,
+      method,
+      data,
+      success = () => console.log("Success"),
+      failure = () => console.log("Failure"),
+    }) {
+      console.log(`Params: url=${url}, method=${method}, data=${data}`);
+      ajaxRequest({
+        url,
+        method,
+        data,
+        success,
+        failure
+      });
     }
   }
 }();
