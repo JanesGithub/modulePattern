@@ -104,11 +104,11 @@ export var $ = function() {
     console.log(`Params: url=${url}, method=${method}, data=${data}`);
     var xhr = new XMLHttpRequest();
     xhr.open(method, url);
-    xhr.onload = function() {
+    xhr.onload = function(response) {
       if (xhr.status === 200) {
-        success();
+        success(response);
       } else if (xhr.status !== 200) {
-        fail();
+        fail(response);
       }
     };
     xhr.send(data);
